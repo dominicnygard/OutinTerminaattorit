@@ -2,7 +2,7 @@ CREATE TABLE items (
   id SERIAL PRIMARY KEY,
   content TEXT NOT NULL,
   done BOOLEAN DEFAULT FALSE
-)
+);
 
 CREATE TABLE articles (
   id SERIAL PRIMARY KEY,
@@ -16,7 +16,7 @@ CREATE TABLE articles (
   number INTEGER,
   pages INTEGER,
   notes TEXT
-)
+);
 
 CREATE TABLE books (
   id SERIAL PRIMARY KEY,
@@ -26,7 +26,7 @@ CREATE TABLE books (
   year TEXT,
   publisher TEXT,
   address TEXT
-)
+);
 
 CREATE TABLE booklets (
   id SERIAL PRIMARY KEY,
@@ -39,7 +39,7 @@ CREATE TABLE booklets (
   notes TEXT,
   howpublished TEXT,
   editor TEXT
-)
+);
 
 CREATE TABLE conferences (
   id SERIAL PRIMARY KEY,
@@ -55,7 +55,7 @@ CREATE TABLE conferences (
   notes TEXT,
   editor TEXT,
   organization TEXT
-)
+);
 
 CREATE TABLE inbooks (
   id SERIAL PRIMARY KEY,
@@ -69,7 +69,7 @@ CREATE TABLE inbooks (
   notes TEXT,
   editor TEXT,
   edition INTEGER
-)
+);
 
 CREATE TABLE incolletions (
   id SERIAL PRIMARY KEY,
@@ -86,7 +86,7 @@ CREATE TABLE incolletions (
   number INTEGER,
   pages INTEGER,
   editor TEXT
-)
+);
 
 CREATE TABLE inproceedings (
   id SERIAL PRIMARY KEY,
@@ -104,7 +104,7 @@ CREATE TABLE inproceedings (
   pages INTEGER,
   editor TEXT,
   organization TEXT
-)
+);
 
 CREATE TABLE manuals (
   id SERIAL PRIMARY KEY,
@@ -117,7 +117,7 @@ CREATE TABLE manuals (
   notes TEXT,
   organization TEXT,
   edition TEXT
-)
+);
 
 CREATE TABLE mastertheseses (
   id SERIAL PRIMARY KEY,
@@ -130,15 +130,15 @@ CREATE TABLE mastertheseses (
   notes TEXT,
   school TEXT,
   type TEXT
-)
+);
 
 CREATE TABLE miscs (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
   author TEXT,
   title TEXT,
-  year TEXT,
-)
+  year TEXT
+);
 
 CREATE TABLE phdtheseses (
   id SERIAL PRIMARY KEY,
@@ -151,7 +151,7 @@ CREATE TABLE phdtheseses (
   notes TEXT,
   school TEXT,
   type TEXT
-)
+);
 
 CREATE TABLE proceedings (
   id SERIAL PRIMARY KEY,
@@ -166,7 +166,7 @@ CREATE TABLE proceedings (
   volume INTEGER,
   number INTEGER,
   editor TEXT
-)
+);
 
 CREATE TABLE techreports (
   id SERIAL PRIMARY KEY,
@@ -176,7 +176,7 @@ CREATE TABLE techreports (
   year TEXT,
   institution TEXT,
   number INTEGER
-)
+);
 
 CREATE TABLE unpublished (
   id SERIAL PRIMARY KEY,
@@ -185,4 +185,4 @@ CREATE TABLE unpublished (
   title TEXT,
   year TEXT,
   institution TEXT
-)
+);
