@@ -7,8 +7,8 @@ Test Setup       Reset Todos
 *** Test Cases ***
 At start there are no todos
     Go To  ${HOME_URL}
-    Title Should Be  Todo app
-    Page Should Contain  things still unfinished: 0
+    Title Should Be  Citation app
+    Page Should Contain  No citations added
 
 After adding a todo, there is one
     Go To  ${HOME_URL}
@@ -29,3 +29,4 @@ After adding two todos and marking one done, there is one unfinished
     Click Button  //li[div[contains(text(), 'Buy milk')]]/form/button
     Page Should Contain  things still unfinished: 1
     Page Should Contain  Buy milk, done
+

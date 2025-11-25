@@ -12,6 +12,7 @@ Todo app
   All citations:
 </div>
 
+{% if citations %}
 <ul>
   {% for cite in citations %}
     <li style="display: flex">
@@ -21,6 +22,10 @@ Todo app
     </li>
   {% endfor %}
 </ul>
+{% else %}
+<p><i>No citations added</i></p>
+{% endif %}
+
 
 <div>
   <a href="/new_citation">Create new citation</a>
