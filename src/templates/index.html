@@ -6,29 +6,24 @@ Todo app
 
 {% block body %}
 
-<h2>Todo app</h2>
+<h2>Citation app</h2>
 
 <div>
-  things still unfinished: {{ unfinished }}
+  All citations:
 </div>
 
 <ul>
-  {% for todo in todos %}
+  {% for cite in citations %}
     <li style="display: flex">
       <div>
-        {{ todo }} 
+        {{ cite['type'] }}: <a href="/item/{{ cite['id'] }}">{{ cite['content'] }}</a>
       </div>
-      {% if not todo.done %}
-        <form action="/toggle_todo/{{ todo.id }}" method="post" style="margin-left: 10px;">
-          <button type="submit">mark as done</button>
-        </form>
-      {% endif %}
     </li>
   {% endfor %}
 </ul>
 
 <div>
-  <a href="/new_todo">Create new todo</a>
+  <a href="/new_citation">Create new citation</a>
 </div>
 
 {% endblock %}
