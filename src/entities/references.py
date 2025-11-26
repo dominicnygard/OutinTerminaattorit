@@ -9,13 +9,14 @@ class References:
             table = row[0]
             data = {k: v for k, v in dict(row._mapping).items() if v is not None}
             
-            if table not in self._registry:
-                self._registry[table] = []
-            self._registry[table].append(data)
+            if table not in self._references:
+                self._references[table] = []
+            self._references[table].append(data)
+
 
     def get_all(self):
         result = []
-        for records in self._registry.values():
+        for records in self._references.values():
             result.extend(records)
         return result
     

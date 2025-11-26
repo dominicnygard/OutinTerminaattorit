@@ -3,12 +3,11 @@ from sqlalchemy import text
 
 from config import references
 
-def get_todos():
-    result = db.session.execute(text("SELECT id, content, done FROM todos"))
+def get_citations():
+    result = db.session.execute(text("SELECT id, type, content FROM items"))
 
     references.set_references(result)
     return references.get_all()
-
 
 def set_done(todo_id):
     sql = text("UPDATE todos SET done = TRUE WHERE id = :id")

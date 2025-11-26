@@ -1,7 +1,7 @@
 CREATE TABLE items (
   id SERIAL PRIMARY KEY,
-  content TEXT NOT NULL,
-  done BOOLEAN DEFAULT FALSE
+  type TEXT,
+  content TEXT
 );
 
 CREATE TABLE articles (
