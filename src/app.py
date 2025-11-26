@@ -30,6 +30,19 @@ def toggle_todo(todo_id):
     set_done(todo_id)
     return redirect("/")
 
+@app.route("/articles/new")
+def new_article():
+    return render_template("new_article.html")
+
+@app.route("/articles/create", methods=["POST"])
+def create_article():
+    title=request.form["title"]
+    author=request.form["author"]
+    year=request.form["year"]
+
+    save_article(title, author, year)
+    return redirect("/")
+
 # testausta varten oleva reitti
 if test_env:
     @app.route("/reset_db")
