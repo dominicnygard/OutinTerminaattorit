@@ -4,7 +4,7 @@ from sqlalchemy import text
 from config import references
 
 def get_citations():
-    result = db.session.execute(text("SELECT id, type FROM items"))
+    result = db.session.execute(text("SELECT id, type, title, author, year FROM items"))
 
     references.set_references(result)
     return references.get_all()

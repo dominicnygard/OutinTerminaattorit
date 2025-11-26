@@ -4,20 +4,21 @@ from sqlalchemy import text
 def save_article(title, author, year):
     result=db.session.execute(
         text("""
-        INSERT INTO items (type)
-        VALUES ('article')
+        INSERT INTO items (type, title, author, year)
+        VALUES ('article', :title, :author, :year)
         RETURNING id;
-        """)
+        """),
+        {"title": title, "author": author, "year": year}
     )
 
     general_id=result.fetchone()[0]
 
     db.session.execute(
         text("""
-        INSERT INTO articles (general_id, title, author, year)
-        VALUES (:general_id, :title, :author, :year);
+        INSERT INTO articles (general_id)
+        VALUES (:general_id);
         """), 
-        {"general_id": general_id, "title": title, "author": author, "year": year}
+        {"general_id": general_id}
     )
 
     db.session.commit()

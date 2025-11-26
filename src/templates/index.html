@@ -17,7 +17,7 @@ Todo app
   {% for cite in citations %}
     <li style="display: flex">
       <div>
-        {{ cite['type'] }}: <a href="/item/{{ cite['id'] }}">{{ cite['content'] }}</a>
+        {{ cite['type'] }}: <a href="/item/{{ cite['id'] }}">{{ cite['title'] }}</a><i> {{ cite['year'] }}, {{ cite['author'] }}</i>
       </div>
     </li>
   {% endfor %}
