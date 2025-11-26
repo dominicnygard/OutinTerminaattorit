@@ -1,7 +1,6 @@
 CREATE TABLE items (
   id SERIAL PRIMARY KEY,
-  type TEXT,
-  content TEXT
+  type TEXT
 );
 
 CREATE TABLE articles (
