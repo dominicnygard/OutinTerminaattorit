@@ -15,8 +15,8 @@ After adding a citation, there is one
     Click Link  Lisää artikkeli
     Input Text  title  science
     Input Text  author  jerry
-    Input Text  year  1999
-    Click Button  Create
+    Input Number  year  1999
+    Click Button  Save
     Page Should Contain  article: science 1999, jerry
 
 After adding two todos and marking one done, there is one unfinished
