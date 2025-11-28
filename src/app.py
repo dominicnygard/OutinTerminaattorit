@@ -11,19 +11,20 @@ def index():
     return render_template("index.html", citations=citations) 
 
 @app.route("/references/type")
-def choose_article_type():
+def choose_reference_type():
     return render_template("reference_choice.html")
 
-@app.route("/references/new")
-def new_article():
-    type = request.form['reference_type']
+@app.route("/references/new", methods=["GET", "POST"])
+def new_reference():
+    type = request.args.get('reference_type') or request.form.get('reference_type')
 
-    return render_template("new_reference.html", fields = reference_fields[type])
+    return render_template("new_reference.html", fields = reference_fields[type], type = type)
 
 @app.route("/references/create", methods=["POST"])
-def create_article():
+def create_reference():
     references = dict(request.form)
-    save_references(references)
+    type = references.pop('reference_type')
+    save_references(references, type)
     return redirect("/")
 
 # testausta varten oleva reitti

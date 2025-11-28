@@ -10,7 +10,7 @@ def save_references(input, type):
         VALUES (:type)
         RETURNING id;
         """),
-        type
+        {"type": type}
     )
 
     general_id=result.fetchone()[0]
