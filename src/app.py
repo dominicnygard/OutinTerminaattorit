@@ -1,47 +1,29 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.todo_repository import get_citations, create_todo, set_done
+from repositories.references_repository import get_citations, save_references
 from config import app, test_env
-from util import validate_todo
-from repositories.article_repository import save_article
+from util import reference_fields
+
 
 @app.route("/")
 def index():
     citations = get_citations()
     return render_template("index.html", citations=citations) 
 
-@app.route("/new_todo")
-def new():
-    return render_template("new_todo.html")
+@app.route("/references/type")
+def choose_article_type():
+    return render_template("reference_choice.html")
 
-@app.route("/create_todo", methods=["POST"])
-def todo_creation():
-    content = request.form.get("content")
-
-    try:
-        validate_todo(content)
-        create_todo(content)
-        return redirect("/")
-    except Exception as error:
-        flash(str(error))
-        return  redirect("/new_todo")
-
-@app.route("/toggle_todo/<todo_id>", methods=["POST"])
-def toggle_todo(todo_id):
-    set_done(todo_id)
-    return redirect("/")
-
-@app.route("/articles/new")
+@app.route("/references/new")
 def new_article():
-    return render_template("new_article.html")
+    type = request.form['reference_type']
 
-@app.route("/articles/create", methods=["POST"])
+    return render_template("new_reference.html", fields = reference_fields[type])
+
+@app.route("/references/create", methods=["POST"])
 def create_article():
-    title=request.form["title"]
-    author=request.form["author"]
-    year=request.form["year"]
-
-    save_article(title, author, year)
+    references = dict(request.form)
+    save_references(references)
     return redirect("/")
 
 # testausta varten oleva reitti

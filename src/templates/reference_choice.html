@@ -1,0 +1,19 @@
+{% extends "layout.html" %} {% block body %}
+
+<form action="/references/new" method="post">
+  <label>
+    <input type="radio" name="reference_type" value="article" />
+    Article
+  </label>
+  <label>
+    <input type="radio" name="reference_type" value="book" />
+    Book
+  </label>
+  <label>
+    <input type="radio" name="reference_type" value="inproceeding" />
+    In Proceeding
+  </label>
+  <button type="submit">Submit</button> />
+</form>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %} {% block body %}
+<h2>Add new article</h2>
+
+<form action="/references/create" method="get">
+  {% for field in fields %}
+  <label for="{{ field }}">Title: </label><br />
+  <input type="text" id="title" name="title" required /><br /><br />
+  {% endfor %}
+
+  <button type="submit">Save</button>
+</form>
+
+{% endblock %}
