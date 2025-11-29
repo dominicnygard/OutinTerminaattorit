@@ -1,38 +1,28 @@
-{% extends "layout.html" %}
-
-{% block title %}
-Todo app
-{% endblock %}
-
-{% block body %}
+{% extends "layout.html" %} {% block title %} Citation app {% endblock %} {%
+block body %}
 
 <h2>Citation app</h2>
 
-<div>
-  All citations:
-</div>
+<div>All citations:</div>
 
 {% if citations %}
 <ul>
   {% for cite in citations %}
-    <li style="display: flex">
-      <div>
-        {{ cite['type'] }}: <a href="/item/{{ cite['id'] }}">{{ cite['title'] }}</a><i> {{ cite['year'] }}, {{ cite['author'] }}</i>
-      </div>
-    </li>
+  <li style="display: flex">
+    <div>
+      {{ cite['type'] }}:
+      <a href="/item/{{ cite['id'] }}">{{ cite['title'] }}</a
+      ><i> {{ cite['year'] }}, {{ cite['author'] }}</i>
+    </div>
+  </li>
   {% endfor %}
 </ul>
 {% else %}
 <p><i>No citations added</i></p>
 {% endif %}
 
-
 <div>
-  <a href="/new_citation">Create new citation</a>
+  <a href="/references/type">Create new citation</a>
 </div>
-
-<dib>
-  <a href="/articles/new">Lisää artikkeli</a>
-</dib>
 
 {% endblock %}

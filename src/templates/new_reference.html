@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block body %}
+<h2>Add new {{ type }}</h2>
+
+<form action="/references/create" method="post">
+  <input type="hidden" name="reference_type" value="{{ type }}" />
+  {% for field in fields %}
+  <label for="{{ field }}">{{ field|capitalize }}: </label><br />
+  <input type="text" id="{{ field }}" name="{{ field }}" /><br /><br />
+  {% endfor %}
+
+  <button type="submit">Save</button>
+</form>
+
+{% endblock %}
