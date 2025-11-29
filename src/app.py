@@ -24,6 +24,7 @@ def new_reference():
 def create_reference():
     references = dict(request.form)
     type = references.pop('reference_type')
+    references = {k: (None if v == '' else v) for k, v in references.items()}
     save_references(references, type)
     return redirect("/")
 
