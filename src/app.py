@@ -1,8 +1,8 @@
 from flask import redirect, render_template, request, jsonify, flash, Response
 from db_helper import reset_db
-from repositories.references_repository import get_citations, save_references, search_references, get_references_by_id, generate_bibtex
+from repositories.references_repository import get_citations, save_references, search_references
 from config import app, test_env
-from util import reference_fields, to_bibtex
+from util import reference_fields
 
 
 @app.route("/")
