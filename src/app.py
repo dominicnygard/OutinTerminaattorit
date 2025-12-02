@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.references_repository import get_citations, save_references
+from repositories.references_repository import get_citations, save_references, search_references
 from config import app, test_env
 from util import reference_fields
 
@@ -27,6 +27,17 @@ def create_reference():
     references = {k: (None if v == '' else v) for k, v in references.items()}
     save_references(references, type)
     return redirect("/")
+
+@app.route("/search", methods=["POST", "GET"])
+def search():
+    results = None
+    message = None
+    query = request.args.get("query")
+    if query:
+        results = search_references(query)
+        if len(results) == 0:
+            message = "No results matched the search query"
+    return render_template("search.html", results=results, message=message)
 
 # testausta varten oleva reitti
 if test_env:

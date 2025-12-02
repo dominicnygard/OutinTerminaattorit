@@ -1,0 +1,24 @@
+{% extends "layout.html" %} {% block body %}
+
+<a href="/">Front Page</a>
+
+<h2>Search for References</h2>
+
+<form action="/search" method="GET">
+    <label for="query">Search:</label>
+    <input type="text" name="query">
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+<ul>
+    {% for result in results %}
+    <li>{{ result["type"] }}: {{ result["title"] }}, <i>{{ result["author"] }}, {{ result["year"] }}</i></li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if message %}
+    <p><i>{{ message }}</i></p>
+{% endif %}
+
+{% endblock %}

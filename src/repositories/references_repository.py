@@ -41,3 +41,12 @@ def get_citations():
 
     references.set_references(result)
     return references.get_all()
+
+def search_references(query):
+    results = []
+    all_references = references.get_all()
+    for ref in all_references:
+        if query in ref["title"]:
+            results.append(ref)
+    return results
+
