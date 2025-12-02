@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from repositories.references_repository import get_citations, save_references, search_references
-from config import app, test_env
+from config import app, test_env, references
 from util import reference_fields
 
 

@@ -44,9 +44,9 @@ def get_citations():
 
 def search_references(query):
     results = []
-    all_references = references.get_all()
+    all_references = references.get_all() if references.get_all() else get_citations()
     for ref in all_references:
-        if query in ref["title"]:
+        if query.lower() in ref["title"].lower():
             results.append(ref)
     return results
 
