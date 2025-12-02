@@ -27,14 +27,15 @@ After adding two different types of citations there are two different types
     Input Text  title  Test title
     Input Text  author  Testi Testinen
     Input Text  year  2025
+    Input Text  journal  science
     Click Button  Save
     Click Link  Create new citation
     Select Radio Button  reference_type  books
-    Click Button  books
     Click Button  Submit
     Input Text  title  Test title
     Input Text  author  Testi Testinen
     Input Text  year  2025
+    Input Text  journal  jour
     Click Button  Save
     Page Should Contain  articles
     Page Should Contain  books
@@ -42,9 +43,9 @@ After adding two different types of citations there are two different types
 When searching for reference with right title there is a search result
     Go To  ${HOME_URL}
     Click Link  Search
-    Input Text  query  Test required
+    Input Text  query  Test article
     Click Button  Search
-    Page Should Contain  Test required
+    Page Should Contain  Test article
 
 When searching for reference with wrong title there is a message
     Go To  ${HOME_URL}
