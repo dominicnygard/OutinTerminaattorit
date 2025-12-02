@@ -50,3 +50,31 @@ def search_references(query):
             results.append(ref)
     return results
 
+def get_references_by_id(id):
+    item = db.session.execute(
+        text("SELECT * FROM items WHERE id = :id"),
+        {"id": id}
+    ).fetchone()
+
+    if not item: 
+        return None
+    
+    reference={
+        "id": item.id,
+        "type": item.type,
+        "title": item.title,
+        "year": item.year,
+        "author": item.author
+    }
+
+    specific = db.session.execute(
+        text(f"SELECT * FROM {item.type} WHERE general_id = :id"),
+        {"id": id}
+    ).fetchone()
+
+    if specific: 
+        for k in specific._mapping.keys():
+            reference[k] = specific[k]
+    
+    return reference
+

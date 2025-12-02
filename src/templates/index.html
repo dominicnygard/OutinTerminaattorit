@@ -15,6 +15,7 @@ block body %}
       {{ cite['type'] }}:
       <a href="/item/{{ cite['id'] }}">{{ cite['title'] }}</a
       ><i> {{ cite['year'] }}, {{ cite['author'] }}</i>
+        <a href="/references/{{ cite['id'] }}/bibtex">BibTex</a>
     </div>
   </li>
   {% endfor %}
