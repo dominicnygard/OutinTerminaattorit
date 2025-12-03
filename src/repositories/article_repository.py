@@ -1,5 +1,5 @@
-from db_helper import db
 from sqlalchemy import text
+from db_helper import db
 
 def save_article(title, author, year):
     result=db.session.execute(
@@ -17,7 +17,7 @@ def save_article(title, author, year):
         text("""
         INSERT INTO articles (general_id)
         VALUES (:general_id);
-        """), 
+        """),
         {"general_id": general_id}
     )
 

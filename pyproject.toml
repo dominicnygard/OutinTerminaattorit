@@ -1,9 +1,11 @@
 [project]
-name = "miniprojekti-boilerplate"
+name = "OutinTerminaattorit"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Matti Luukkainen",email = "mluukkai@iki.fi"}
+    {name = "Dominic Nygård", email = "dominic.nygard@helsinki.fi"},
+    {name = "Kara Atsar", email = "kara.atsar@helsinki.fi"},
+    {name = "Niina Kampman", email = "niina.kampman@helsinki.fi"}
 ]
 license = {text = "MIT"}
 requires-python = "^3.12"
@@ -20,7 +22,9 @@ dependencies = [
 dev = [
     "robotframework (>=7.3.2,<8.0.0)",
     "robotframework-seleniumlibrary (>=6.8.0,<7.0.0)",
-    "pytest (>=8.4.2,<9.0.0)"
+    "pytest (>=8.4.2,<9.0.0)",
+    "pylint (>=4.0.4,<5.0.0)",
+    "pre-commit (>=4.5.0,<5.0.0)"
 ]
 
 [tool.poetry]

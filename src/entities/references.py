@@ -8,7 +8,7 @@ class References:
         for row in query:
             table = row[0]
             data = {k: v for k, v in dict(row._mapping).items() if v is not None}
-            
+
             if table not in self._references:
                 self._references[table] = []
             self._references[table].append(data)
@@ -19,9 +19,9 @@ class References:
         for records in self._references.values():
             result.extend(records)
         return result
-    
+
     def get_by_table(self, table):
         return self._references.get(table, [])
-    
+
     def clear(self):
         self._references.clear()

@@ -1,5 +1,7 @@
 *** Settings ***
 Library  SeleniumLibrary
+Library  OperatingSystem
+Library  Collections
 
 *** Variables ***
 ${SERVER}     localhost:5001
@@ -8,11 +10,16 @@ ${HOME_URL}   http://${SERVER}
 ${RESET_URL}  http://${SERVER}/reset_db
 ${BROWSER}    chrome
 ${HEADLESS}   false
+${DOWNLOAD_DIR}  ${EXECDIR}/src/story_tests/downloads
 
 *** Keywords ***
 Open And Configure Browser
+    Create Directory  ${DOWNLOAD_DIR}
+    ${abs_download_dir}=  Normalize Path  ${DOWNLOAD_DIR}
     IF  $BROWSER == 'chrome'
         ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
+        ${prefs}=  Evaluate  {"download.default_directory": r"${abs_download_dir}".replace("\\\\", "/"), "download.prompt_for_download": False, "safebrowsing.enabled": False}
+        Call Method  ${options}  add_experimental_option  prefs  ${prefs}
         Call Method  ${options}  add_argument  --incognito
     ELSE IF  $BROWSER == 'firefox'
         ${options}  Evaluate  sys.modules['selenium.webdriver'].FirefoxOptions()  sys
@@ -28,4 +35,13 @@ Open And Configure Browser
 
 Reset Citations
     Go To  ${RESET_URL}
+    Empty Directory  ${DOWNLOAD_DIR}
+
+Wait For Downloaded File
+    ${files}=  List Files In Directory  ${DOWNLOAD_DIR}
+    Should Not Be Empty  ${files}
+    ${file}=  Get From List  ${files}  0
+    ${file_path}=  Join Path  ${DOWNLOAD_DIR}  ${file}
+    ${path}=  Normalize Path  ${file_path}
+    RETURN  ${path}
 
