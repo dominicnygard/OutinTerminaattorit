@@ -47,6 +47,20 @@ def bibtex(id):
     bibtex_text = to_bibtex(reference)
     return Response(bibtex_text, mimetype="text/plain")
 
+@app.route("/bibtex/download")
+def download_all_bibtex():
+    all_references = get_citations()
+    all_citations = [get_references_by_id(ref["id"]) for ref in all_references]
+
+    bibtex_entries = [to_bibtex(ref) for ref in all_citations]
+    bibtex_text = "\n\n".join(bibtex_entries)
+    
+    return Response(
+        bibtex_text,
+        mimetype="application/x-bibtex",
+        headers={"Content-Disposition": "attachment; filename=references.bib"}
+    )
+
 
 # testausta varten oleva reitti
 if test_env:

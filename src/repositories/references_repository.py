@@ -74,7 +74,7 @@ def get_references_by_id(id):
 
     if specific: 
         for k in specific._mapping.keys():
-            reference[k] = specific[k]
+            reference[k] = dict(specific._mapping)[k]
     
     return reference
 
