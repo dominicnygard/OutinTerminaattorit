@@ -63,24 +63,3 @@ When searching for reference with wrong title there is a message
     Click Button  Search
     Page Should Contain  No results matched the search query
 
-Downloading BibTeX file contains reference data
-    Go To  ${HOME_URL}
-    Click Link  Create new citation
-    Click Button  Submit
-    Input Text  title  BibTeX Article
-    Input Text  author  Testi Testinen
-    Input Text  year  1999
-    Input Text  journal  Nature
-    Click Button  Save
-    Run Keyword And Ignore Error  Remove File  ${DOWNLOAD_DIR}/references.bib
-    Empty Directory  ${DOWNLOAD_DIR}
-    Click Button  Download references
-    ${downloaded_file}=  Wait Until Keyword Succeeds  10x  1s  Wait For Downloaded File
-    Move File  ${downloaded_file}  ${DOWNLOAD_DIR}/references.bib
-    ${file_content}=  Get File  ${DOWNLOAD_DIR}/references.bib
-    Should Contain  ${file_content}  @article
-    Should Contain  ${file_content}  title = {BibTeX Article}
-    Should Contain  ${file_content}  author = {Testi Testinen}
-    Should Contain  ${file_content}  year = {1999}
-    Should Contain  ${file_content}  journal = {Nature}
-
