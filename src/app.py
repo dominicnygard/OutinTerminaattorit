@@ -1,8 +1,8 @@
-from flask import redirect, render_template, request, jsonify, flash
+from flask import redirect, render_template, request, jsonify, flash, Response
 from db_helper import reset_db
-from repositories.references_repository import get_citations, save_references, search_references
+from repositories.references_repository import get_citations, save_references, search_references, get_references_by_id
 from config import app, test_env, references
-from util import reference_fields
+from util import reference_fields, to_bibtex
 
 
 @app.route("/")
@@ -38,6 +38,15 @@ def search():
         if len(results) == 0:
             message = "No results matched the search query"
     return render_template("search.html", results=results, message=message)
+
+@app.route("/references/<int:id>/bibtex")
+def bibtex(id):
+    reference= get_references_by_id(id)
+    if not reference:
+        return "Reference not found", 404
+    bibtex_text = to_bibtex(reference)
+    return Response(bibtex_text, mimetype="text/plain")
+
 
 # testausta varten oleva reitti
 if test_env:
