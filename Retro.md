@@ -1,5 +1,6 @@
-Retrospektiivi
+#Retrospektiivi
 
+##Sprint 1
 
 Mitä parannettavaa?
 - Pyritään tekemään lähtökohtaisesti muiden työhön yhteensopivia muokkauksia
@@ -13,4 +14,17 @@ Mikä toimi hyvin?
 - Yhteistapaamiset
 - Sovelluksen rakennus
 - Henkilökohtainen ajanhallinta ja työmäärän hajautus
+
+##Sprint 2
+
+Mitä parannettavaa?
+- Testaillaan enemmän ennen sovelluksen esittelyä
+- Kommunikaatio
+- Kommunikoidaan taskien tilannetta
+
+Mikä toimi hyvin?
+- Trunk based development
+- Yhteistapaamiset
+- Asiakastapaaminen
+- Sopiva työmäärä
 
