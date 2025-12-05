@@ -1,7 +1,5 @@
 from sqlalchemy import text
-from db_helper import db
-
-from config import references
+from src.config import db, references
 
 def save_references(ref_input, ref_type):
     result=db.session.execute(

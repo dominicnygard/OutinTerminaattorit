@@ -1,5 +1,5 @@
 from sqlalchemy import text
-from db_helper import db
+from src.config import db
 
 def save_article(title, author, year):
     result=db.session.execute(

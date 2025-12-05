@@ -1,9 +1,13 @@
 from flask import redirect, render_template, request, jsonify, Response
-from db_helper import reset_db
-from repositories.references_repository import get_citations, save_references, \
-                                        search_references, get_references_by_id
-from config import app, test_env
-from util import reference_fields, to_bibtex
+from src.db_helper import reset_db
+from src.repositories.references_repository import (
+    get_citations,
+    save_references,
+    search_references,
+    get_references_by_id,
+)
+from src.config import app, test_env
+from src.util import reference_fields, to_bibtex
 
 
 @app.route("/")

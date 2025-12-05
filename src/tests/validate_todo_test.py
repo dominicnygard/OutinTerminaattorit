@@ -1,5 +1,5 @@
 import unittest
-from util import validate_field, UserInputError
+from src.util import validate_field, UserInputError
 
 class TestFieldValidation(unittest.TestCase):
     def setUp(self):

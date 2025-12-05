@@ -1,6 +1,6 @@
 import unittest
 
-from util import to_bibtex
+from src.util import to_bibtex
 
 
 class TestBibtexUtilities(unittest.TestCase):
