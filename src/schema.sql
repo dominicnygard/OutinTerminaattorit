@@ -13,7 +13,7 @@ CREATE TABLE articles (
   journal TEXT,
   volume INTEGER,
   number INTEGER,
-  pages INTEGER,
+  pages TEXT,
   notes TEXT
 );
 
@@ -41,7 +41,7 @@ CREATE TABLE conferences (
   booktitle TEXT,
   publisher TEXT,
   address TEXT,
-  pages INTEGER,
+  pages TEXT,
   notes TEXT,
   editor TEXT,
   organization TEXT
@@ -52,7 +52,7 @@ CREATE TABLE inbooks (
   general_id INTEGER REFERENCES items,
   booktitle TEXT,
   publisher TEXT,
-  pages INTEGER,
+  pages TEXT,
   notes TEXT,
   editor TEXT,
   edition INTEGER
@@ -68,7 +68,7 @@ CREATE TABLE incolletions (
   series TEXT,
   volume INTEGER,
   number INTEGER,
-  pages INTEGER,
+  pages TEXT,
   editor TEXT
 );
 
@@ -82,7 +82,7 @@ CREATE TABLE inproceedings (
   series TEXT,
   volume INTEGER,
   number INTEGER,
-  pages INTEGER,
+  pages TEXT,
   editor TEXT,
   organization TEXT
 );

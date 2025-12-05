@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block title %} Citation app {% endblock %} {%
+block body %}
+
+<h2>{{ citation["title"] }}</h2>
+
+<ul>
+  {% for key, value in citation.items() %} {% if key != "id" and key != "title"
+  and key != "general_id" %}
+  <li><strong>{{ key|capitalize }}:</strong> {{ value }}</li>
+  {% endif %} {% endfor %}
+</ul>
+
+<pre>{{ bibtex_format }}</pre>
+{% endblock %}

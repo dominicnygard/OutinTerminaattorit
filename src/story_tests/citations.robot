@@ -42,6 +42,8 @@ After adding two different types of citations there are two different types
     Page Should Contain  articles
     Page Should Contain  books
 
+
+
 When searching for reference with right title there is a search result
     Go To  ${HOME_URL}
     Click Link  Create new citation
@@ -62,4 +64,24 @@ When searching for reference with wrong title there is a message
     Input Text  query  wrong query
     Click Button  Search
     Page Should Contain  No results matched the search query
+
+
+Clicking a citation opens detail view and bibtex
+    Go To  ${HOME_URL}
+    Click Link  Create new citation
+    Click Button  Submit
+    Input Text  title  Article
+    Input Text  author  Author
+    Input Text  year  2024
+    Input Text  journal  Journal
+    Click Button  Save
+    Click Link  Article
+    Page Should Contain  Article
+    Page Should Contain  Author:
+    Page Should Contain  Author
+    Page Should Contain  Journal:
+    Page Should Contain  Journal
+    Page Should Contain  @article{
+    Page Should Contain  author = {Author}
+    Page Should Contain  journal = {Journal}
 

@@ -56,6 +56,11 @@ def download_all_bibtex():
         headers={"Content-Disposition": "attachment; filename=references.bib"}
     )
 
+@app.route("/references/<int:ref_id>")
+def reference_view(ref_id):
+    citation = get_references_by_id(ref_id)
+    bibtex_format = to_bibtex(citation)
+    return render_template("reference.html", citation=citation, bibtex_format=bibtex_format)
 
 # testausta varten oleva reitti
 if test_env:

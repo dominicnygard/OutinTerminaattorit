@@ -1,3 +1,6 @@
+from random import choice
+from re import sub
+
 class UserInputError(Exception):
     pass
 
@@ -90,7 +93,7 @@ bibtex_type_mapping = {
     "booklets": "booklet",
 }
 
-def to_bibtex(reference: dict) -> str:
+def to_bibtex(reference):
     bib_type=bibtex_type_mapping.get(reference["type"], reference["type"])
     possible_fields = ["author", "title", "year", "journal", "volume",
                        "number", "pages", "month", "notes", "publisher",
@@ -102,7 +105,9 @@ def to_bibtex(reference: dict) -> str:
         if value not in (None, ""):
             fields[key]=value
 
-    bibtex_lines = [f"@{bib_type}{{{reference['id']},"]
+    bibtex_lines = [f"@{bib_type}{{{citation_key(reference['title'],
+                                                 reference['author'],
+                                                 reference['year'])},"]
     for k, v in fields.items():
         bibtex_lines.append(f"  {k} = {{{v}}},")
 
@@ -112,3 +117,12 @@ def to_bibtex(reference: dict) -> str:
     bibtex_lines.append("}")
 
     return "\n".join(bibtex_lines)
+
+def citation_key(title, author, year):
+    excluded_words = {"the", "an", "a", "of", "and", "for", "with", "on", "in", "to", "at"}
+    cleaned_title = sub(r"[^A-Za-z0-9\s]", "", title)
+    last_name = author.split()[-1].capitalize()
+    key_word = choice(
+        [w.capitalize() for w in cleaned_title.lower().split() if not w in excluded_words]
+    )
+    return last_name + year + key_word

@@ -18,7 +18,7 @@ class TestBibtexUtilities(unittest.TestCase):
 
         result = to_bibtex(reference)
 
-        self.assertIn("@article{42,", result)
+        self.assertIn("@article", result)
         self.assertIn("title = {BibTex testi}", result)
         self.assertNotIn("notes", result)
 
