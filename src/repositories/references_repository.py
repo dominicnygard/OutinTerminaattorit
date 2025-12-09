@@ -42,12 +42,20 @@ def get_citations():
     references.set_references(result)
     return references.get_all()
 
-def search_references(query):
+def search_references(query=None, year=None, author=None):
     results = []
     all_references = references.get_all() if references.get_all() else get_citations()
     for ref in all_references:
-        if query.lower() in ref["title"].lower():
-            results.append(ref)
+        if query:
+            if not query.lower() in ref["title"].lower():
+                continue
+        if year:
+            if not year in ref["year"]:
+                continue
+        if author:
+            if not author.lower() in ref["author"].lower():
+                continue
+        results.append(ref)
     return results
 
 def get_references_by_id(ref_id):

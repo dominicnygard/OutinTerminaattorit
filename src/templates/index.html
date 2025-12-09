@@ -3,9 +3,15 @@ block body %}
 
 <h2>Citation app</h2>
 
-<a href="/search">Search</a>
-
-<div>All citations:</div>
+<form action="/" method="GET">
+    <label for="query">Search:</label>
+    <input type="text" name="query">
+    <label for="year">Year:</label>
+    <input type="text" name="year">
+    <label for="author">Author:</label>
+    <input type="text" name="author">
+    <button type="submit">Search</button>
+</form>
 
 {% if citations %}
 <ul>
@@ -19,8 +25,10 @@ block body %}
   </li>
   {% endfor %}
 </ul>
+{% elif message %}
+    <p><i>{{ message }}</i></p>
 {% else %}
-<p><i>No citations added</i></p>
+  <p><i>No citations added</i></p>
 {% endif %}
 
 <div>
