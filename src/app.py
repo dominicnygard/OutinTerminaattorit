@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, jsonify, Response
 from db_helper import reset_db
 from repositories.references_repository import get_citations, save_references, \
-                                        search_references, get_references_by_id
+                                        search_references, get_references_by_id, filter_references
 from config import app, test_env
 from util import reference_fields, to_bibtex
 
@@ -13,10 +13,14 @@ def index():
     query = request.args.get("query")
     year = request.args.get("year")
     author = request.args.get("author")
+    types = request.args.getlist("type_filter")
     if query or year or author:
         citations = search_references(query=query, year=year, author=author)
         if len(citations) == 0:
             message = "No results matched the search query"
+    if types:
+        citations = filter_references(citations, types)
+
     return render_template("index.html", citations=citations, message=message)
 
 @app.route("/references/type")

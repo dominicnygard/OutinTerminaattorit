@@ -58,6 +58,14 @@ def search_references(query=None, year=None, author=None):
         results.append(ref)
     return results
 
+def filter_references(references, types):
+    results = []
+    types = [t.lower() for t in types]
+    for ref in references:
+        if ref["type"] in types:
+            results.append(ref)
+    return results
+
 def get_references_by_id(ref_id):
     item = db.session.execute(
         text("SELECT * FROM items WHERE id = :id"),

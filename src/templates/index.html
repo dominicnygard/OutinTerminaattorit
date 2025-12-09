@@ -3,8 +3,9 @@ block body %}
 
 <h2>Citation app</h2>
 
+<p>Search:</p>
 <form action="/" method="GET">
-    <label for="query">Search:</label>
+    <label for="query">Title:</label>
     <input type="text" name="query">
     <label for="year">Year:</label>
     <input type="text" name="year">
@@ -12,6 +13,51 @@ block body %}
     <input type="text" name="author">
     <button type="submit">Search</button>
 </form>
+
+<p>Filter by type:</p>
+<form action="/" method="GET">
+  <input type="checkbox" id="Articles" name="type_filter" value="Articles">
+  <label for="Articles"> Articles</label>
+
+  <input type="checkbox" id="Books" name="type_filter" value="Books">
+  <label for="Books"> Books</label>
+
+  <input type="checkbox" id="Inproceedings" name="type_filter" value="Inproceedings">
+  <label for="Inproceedings"> Inproceedings</label>
+
+  <input type="checkbox" id="Booklets" name="type_filter" value="Booklets">
+  <label for="Booklets"> Booklets</label>
+
+  <input type="checkbox" id="Conferences" name="type_filter" value="Conferences">
+  <label for="Conferences"> Conferences</label>
+
+  <input type="checkbox" id="Inbooks" name="type_filter" value="Inbooks">
+  <label for="Inbooks"> Inbooks</label>
+
+  <input type="checkbox" id="Incollections" name="type_filter" value="Incollections">
+  <label for="Incollections"> Incollections</label>
+
+  <input type="checkbox" id="Manuals" name="type_filter" value="Manuals">
+  <label for="Manuals"> Manuals</label>
+
+  <input type="checkbox" id="Mastertheses" name="type_filter" value="Mastertheses">
+  <label for="Mastertheses"> Mastertheses</label>
+
+  <input type="checkbox" id="Pdhtheses" name="type_filter" value="Pdhtheses">
+  <label for="Pdhtheses"> Pdhtheses</label>
+
+  <input type="checkbox" id="Proceedings" name="type_filter" value="Proceedings">
+  <label for="Proceedings"> Proceedings</label>
+
+  <input type="checkbox" id="Techreports" name="type_filter" value="Techreports">
+  <label for="Techreports"> Techreports</label>
+
+  <input type="checkbox" id="Unpublished" name="type_filter" value="Unpublished">
+  <label for="Unpublished"> Unpublished</label>
+  <br>
+  <button type="submit">Filter</button>
+</form>
+
 
 {% if citations %}
 <ul>
