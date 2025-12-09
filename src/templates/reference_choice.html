@@ -1,59 +1,44 @@
-{% extends "layout.html" %} {% block body %}
+{% extends "layout.html" %} {% block body %} {% set reference_types = [
+("articles", "Article"), ("books", "Book"), ("inproceedings", "In proceeding"),
+("booklets", "Booklet"), ("conferences", "Conference"), ("inbooks", "Inbook"),
+("incollections", "Incollection"), ("manuals", "Manual"), ("mastertheseses",
+"Master thesis"), ("phdtheseses", "PhD thesis"), ("proceedings", "Proceeding"),
+("techreports", "Tech report"), ("unpublisheds", "Unpublished") ] %}
 
-<form action="/references/new" method="post">
-  <label>
-    <input type="radio" name="reference_type" value="articles" checked />
-    Article
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="books" />
-    Book
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="inproceedings" />
-    In Proceeding
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="booklets" />
-    Booklet
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="conferences" />
-    Conference
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="inbooks" />
-    Inbook
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="incollections" />
-    Incollection
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="manuals" />
-    Manual
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="mastertheseses" />
-    Masterthesis
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="phdheseses" />
-    PhDthesis
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="proceedings" />
-    Proceeding
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="techreports" />
-    Techreport
-  </label>
-  <label>
-    <input type="radio" name="reference_type" value="unpublisheds" />
-    Unpublished
-  </label>
-  <button type="submit">Submit</button>
-</form>
+<section class="reference-choice">
+  <h2>Choose a reference type</h2>
+  <p>
+    Select the template that matches your source. You can refine the fields on
+    the next screen.
+  </p>
+
+  <form action="/references/new" method="post" class="reference-type-form">
+    <div class="reference-type-grid">
+      {% for value, label in reference_types %}
+      <label class="type-card">
+        <input
+          type="radio"
+          name="reference_type"
+          value="{{ value }}"
+          {%
+          if
+          loop.first
+          %}checked{%
+          endif
+          %}
+        />
+        <div class="type-card-content">
+          <span class="type-name">{{ label }}</span>
+          <span class="type-hint"
+            >{{ value|replace('_', ' ')|capitalize }}</span
+          >
+        </div>
+      </label>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="primary-btn">Continue</button>
+  </form>
+</section>
 
 {% endblock %}

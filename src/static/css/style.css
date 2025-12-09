@@ -1,105 +1,408 @@
 /*LIGHT MODE */
-body.light, body {
-    --bg: #69697d;
-    --text: #f5f5f5;
-    --card-bg: #747498;
-    --accent: #126aef;
+body.light,
+body {
+  --bg: #69697d;
+  --text: #f5f5f5;
+  --card-bg: #747498;
+  --accent: #126aef;
 }
 
 /* CHRISTMAS MODE */
 body.christmas {
-    --bg: #c40303;
-    --text: #84d175;
-    --card-bg: #b82b2b;
-    --accent: #279725;
-    font-family: 'Mountains of Christmas', cursive;
-    letter-spacing: 1px;
+  --bg: #c40303;
+  --text: #84d175;
+  --card-bg: #b82b2b;
+  --accent: #279725;
+  font-family: "Mountains of Christmas", cursive;
+  letter-spacing: 1px;
 }
 
 /* Snowflakes hidden unless in Christmas mode */
 body:not(.christmas) .snowflakes {
-    display: none;
+  display: none;
 }
 
 /* GENERAL PAGE STYLE */
 body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    transition: background 0.3s, color 0.3s;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* container */
 .container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-    background: var(--card-bg);
-    border-radius: 20px;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background: var(--card-bg);
+  border-radius: 20px;
 }
 
 /* changing the style(mode) */
 #theme-button {
-    background: var(--accent);
-    border: none;
-    padding: 12px 18px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    position: fixed;
-    top: 20px;
-    right: 20px;
+  background: var(--accent);
+  border: none;
+  padding: 12px 18px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  right: 20px;
 }
 
 .page-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: var(--text);
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--text);
 }
 
 .section-title {
-    margin-top: 30px;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-    color: var(--text);
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: var(--text);
 }
 
 .actions {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .btn {
-    background: var(--accent);
-    padding: 10px 15px;
-    color: white !important;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: 0.2s;
+  background: var(--accent);
+  padding: 10px 15px;
+  color: white !important;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.2s;
 }
 
 .btn:hover {
-    opacity: 0.85;
+  opacity: 0.85;
 }
 
 .citation-list {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .citation-card {
-    background: var(--card-bg);
-    padding: 15px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: transform 0.1s ease;
+  background: var(--card-bg);
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.1s ease;
 }
 
 .citation-card:hover {
-    transform: scale(1.02);
+  transform: scale(1.02);
+}
+
+.citation-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.reference-choice {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.reference-choice h2 {
+  margin-bottom: 0.25rem;
+}
+
+.reference-choice p {
+  margin-bottom: 1.5rem;
+}
+
+.reference-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.type-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.9rem;
+  cursor: pointer;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.type-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.type-card input {
+  position: absolute;
+  opacity: 0;
+}
+
+.type-card-content {
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.type-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.type-hint {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.type-card input:checked + .type-card-content {
+  border-left: 4px solid var(--accent);
+  background: rgba(18, 106, 239, 0.12);
+}
+
+.primary-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+  .type-card-content {
+    padding: 0.9rem 1rem;
+  }
+}
+
+.reference-form-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.reference-form-header {
+  margin-bottom: 2rem;
+}
+
+.reference-form-header .eyebrow {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.35rem;
+}
+
+.reference-form-header h2 {
+  margin: 0 0 0.6rem;
+}
+
+.reference-form-header .subtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.reference-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.field-section h3 {
+  margin: 0 0 1rem;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.section-hint {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.form-field input {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.15);
+  color: var(--text);
+}
+
+.form-field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(18, 106, 239, 0.25);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--text) !important;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: #fff !important;
+  border: none;
+}
+
+.btn.primary:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 700px) {
+  .reference-form-wrapper {
+    padding: 1.5rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}
+
+.reference-detail {
+  max-width: 920px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+}
+
+.detail-header {
+  margin-bottom: 1.5rem;
+}
+
+.detail-header .eyebrow {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.detail-header h1 {
+  margin: 0.2rem 0;
+}
+
+.detail-meta {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+}
+
+.detail-section {
+  margin-bottom: 2rem;
+}
+
+.reference-fields {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.field-row dt {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.field-row dd {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.bibtex-block {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 640px) {
+  .reference-detail {
+    padding: 1.5rem;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
 }

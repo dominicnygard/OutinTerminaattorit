@@ -1,9 +1,5 @@
-{% extends "layout.html" %}
-
-{% block title %}Citation App{% endblock %}
-
-
-{% if citations %}
+{% extends "layout.html" %} {% block title %}Citation App{% endblock %} {% if
+citations %}
 <ul>
   {% for cite in citations %}
   <li style="display: flex">
@@ -16,101 +12,135 @@
   {% endfor %}
 </ul>
 {% elif message %}
-    <p><i>{{ message }}</i></p>
+<p><i>{{ message }}</i></p>
 {% else %}
-  <p><i>No citations added</i></p>
-{% endif %}
-
-
-
-{% block content %}
+<p><i>No citations added</i></p>
+{% endif %} {% block content %}
 <div class="container">
-    <h1 class="page-title">Citation App</h1>
+  <h1 class="page-title">Citation App</h1>
 
-    <div class="actions">
-        <a class="btn" href="/references/type">➕ Add New Citation</a>
-        <a class="btn" href="/bibtex/download">⭳ Download References</a>
-    </div>
+  <div class="actions">
+    <a class="btn" href="/references/type">➕ Add New Citation</a>
+    <a class="btn" href="/bibtex/download">⭳ Download References</a>
+  </div>
 
   <p>Search:</p>
   <form action="/" method="GET">
-      <label for="query">Title:</label>
-      <input type="text" name="query">
-      <label for="year">Year:</label>
-      <input type="text" name="year">
-      <label for="author">Author:</label>
-      <input type="text" name="author">
-      <button type="submit">Search</button>
+    <label for="query">Title:</label>
+    <input type="text" name="query" />
+    <label for="year">Year:</label>
+    <input type="text" name="year" />
+    <label for="author">Author:</label>
+    <input type="text" name="author" />
+    <button type="submit">Search</button>
   </form>
 
   <p>Filter by type:</p>
   <form action="/" method="GET">
-    <input type="checkbox" id="Articles" name="type_filter" value="Articles">
+    <input type="checkbox" id="Articles" name="type_filter" value="Articles" />
     <label for="Articles"> Articles</label>
 
-    <input type="checkbox" id="Books" name="type_filter" value="Books">
+    <input type="checkbox" id="Books" name="type_filter" value="Books" />
     <label for="Books"> Books</label>
 
-    <input type="checkbox" id="Inproceedings" name="type_filter" value="Inproceedings">
+    <input
+      type="checkbox"
+      id="Inproceedings"
+      name="type_filter"
+      value="Inproceedings"
+    />
     <label for="Inproceedings"> Inproceedings</label>
 
-    <input type="checkbox" id="Booklets" name="type_filter" value="Booklets">
+    <input type="checkbox" id="Booklets" name="type_filter" value="Booklets" />
     <label for="Booklets"> Booklets</label>
 
-    <input type="checkbox" id="Conferences" name="type_filter" value="Conferences">
+    <input
+      type="checkbox"
+      id="Conferences"
+      name="type_filter"
+      value="Conferences"
+    />
     <label for="Conferences"> Conferences</label>
 
-    <input type="checkbox" id="Inbooks" name="type_filter" value="Inbooks">
+    <input type="checkbox" id="Inbooks" name="type_filter" value="Inbooks" />
     <label for="Inbooks"> Inbooks</label>
 
-    <input type="checkbox" id="Incollections" name="type_filter" value="Incollections">
+    <input
+      type="checkbox"
+      id="Incollections"
+      name="type_filter"
+      value="Incollections"
+    />
     <label for="Incollections"> Incollections</label>
-    <br>
-    <input type="checkbox" id="Manuals" name="type_filter" value="Manuals">
+    <br />
+    <input type="checkbox" id="Manuals" name="type_filter" value="Manuals" />
     <label for="Manuals"> Manuals</label>
 
-    <input type="checkbox" id="Mastertheses" name="type_filter" value="Mastertheses">
+    <input
+      type="checkbox"
+      id="Mastertheses"
+      name="type_filter"
+      value="Mastertheses"
+    />
     <label for="Mastertheses"> Mastertheses</label>
 
-    <input type="checkbox" id="Pdhtheses" name="type_filter" value="Pdhtheses">
+    <input
+      type="checkbox"
+      id="Pdhtheses"
+      name="type_filter"
+      value="Pdhtheses"
+    />
     <label for="Pdhtheses"> Pdhtheses</label>
 
-    <input type="checkbox" id="Proceedings" name="type_filter" value="Proceedings">
+    <input
+      type="checkbox"
+      id="Proceedings"
+      name="type_filter"
+      value="Proceedings"
+    />
     <label for="Proceedings"> Proceedings</label>
 
-    <input type="checkbox" id="Techreports" name="type_filter" value="Techreports">
+    <input
+      type="checkbox"
+      id="Techreports"
+      name="type_filter"
+      value="Techreports"
+    />
     <label for="Techreports"> Techreports</label>
 
-    <input type="checkbox" id="Unpublished" name="type_filter" value="Unpublished">
+    <input
+      type="checkbox"
+      id="Unpublished"
+      name="type_filter"
+      value="Unpublished"
+    />
     <label for="Unpublished"> Unpublished</label>
-    <br>
+    <br />
     <button type="submit">Filter</button>
   </form>
 
+  <h2 class="section-title">All Citations</h2>
 
-    <h2 class="section-title">All Citations</h2>
-
-    {% if citations %}
-        <ul class="citation-list">
-        {% for cite in citations %}
-            <li class="citation-card">
-                <div class="citation-main">
-                    <strong>{{ cite['type'] }}:</strong>
-                    <a href="/references/{{ cite['id'] }}" class="citation-title">
-                        {{ cite['title'] }}
-                    </a>
-                </div>
-                <div class="citation-meta">
-                    {{ cite['year'] }} &middot; {{ cite['author'] }}
-                </div>
-            </li>
-        {% endfor %}
-        </ul>
-    {% elif message %}
-        <p><i>{{ message }}</i></p>
-    {% else %}
-        <p><i>No citations added yet.</i></p>
-    {% endif %}
+  {% if citations %}
+  <ul class="citation-list">
+    {% for cite in citations %}
+    <li class="citation-card">
+      <a class="citation-card-link" href="/references/{{ cite['id'] }}">
+        <div class="citation-main">
+          <strong>{{ cite['type'] }}:</strong>
+          <span class="citation-title">{{ cite['title'] }}</span>
+        </div>
+        <div class="citation-meta">
+          {{ cite['year'] }} &middot; {{ cite['author'] }}
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% elif message %}
+  <p><i>{{ message }}</i></p>
+  {% else %}
+  <p><i>No citations added yet.</i></p>
+  {% endif %}
 </div>
 {% endblock %}
-

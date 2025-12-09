@@ -1,20 +1,50 @@
 {% extends "layout.html" %} {% block body %}
-<h2>Add new {{ type }}</h2>
+<div class="reference-form-wrapper">
+  <header class="reference-form-header">
+    <p class="eyebrow">{{ type|capitalize }} reference</p>
+    <h2>Create a new entry</h2>
+    <p class="subtitle">
+      Fill in the required details below. Optional fields help produce a richer
+      citation but can be left blank.
+    </p>
+  </header>
 
-<form action="/references/create" method="post">
-  <input type="hidden" name="reference_type" value="{{ type }}" />
-  <h3>Required fields</h3>
-  {% for field in fields["required"] %}
-  <label for="{{ field }}">{{ field|capitalize }}: </label><br />
-  <input type="text" id="{{ field }}" name="{{ field }}" required /><br /><br />
-  {% endfor %} {% if fields["optional"] %}
-  <h3>Optional fields</h3>
-  {% for field in fields["optional"] %}
-  <label for="{{ field }}">{{ field|capitalize }}: </label><br />
-  <input type="text" id="{{ field }}" name="{{ field }}" /><br /><br />
-  {% endfor %} {% endif %}
+  <form action="/references/create" method="post" class="reference-form">
+    <input type="hidden" name="reference_type" value="{{ type }}" />
 
-  <button type="submit">Save</button>
-</form>
+    <section class="field-section">
+      <h3>Required fields</h3>
+      <div class="field-grid">
+        {% for field in fields["required"] %}
+        <label class="form-field">
+          <span class="field-label">{{ field|replace('_', ' ')|title }}</span>
+          <input type="text" id="{{ field }}" name="{{ field }}" required />
+        </label>
+        {% endfor %}
+      </div>
+    </section>
 
+    {% if fields["optional"] %}
+    <section class="field-section">
+      <div class="section-heading">
+        <h3>Optional fields</h3>
+        <span class="section-hint">Improve citations with extra context</span>
+      </div>
+      <div class="field-grid">
+        {% for field in fields["optional"] %}
+        <label class="form-field">
+          <span class="field-label">{{ field|replace('_', ' ')|title }}</span>
+          <input type="text" id="{{ field }}" name="{{ field }}" />
+        </label>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <div class="form-actions">
+      <a href="/" class="btn ghost">Cancel</a>
+      <button type="submit" class="btn primary">Save reference</button>
+    </div>
+  </form>
+</div>
 {% endblock %}

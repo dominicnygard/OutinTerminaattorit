@@ -1,14 +1,33 @@
-{% extends "layout.html" %} {% block title %} Citation app {% endblock %} {%
-block body %}
+{% extends "layout.html" %} {% block title %}{{ citation["title"] }} · Citation
+App{% endblock %} {% block body %}
+<div class="reference-detail">
+  <a href="/" class="back-link">← Back to citations</a>
 
-<h2>{{ citation["title"] }}</h2>
+  <header class="detail-header">
+    <p class="eyebrow">{{ citation["type"]|replace('_',' ')|title }}</p>
+    <h1>{{ citation["title"] }}</h1>
+    <p class="detail-meta">{{ citation["author"] }} · {{ citation["year"] }}</p>
+  </header>
 
-<ul>
-  {% for key, value in citation.items() %} {% if key != "id" and key != "title"
-  and key != "general_id" %}
-  <li><strong>{{ key|capitalize }}:</strong> {{ value }}</li>
-  {% endif %} {% endfor %}
-</ul>
+  <section class="detail-section">
+    <h2>Reference details</h2>
+    <dl class="reference-fields">
+      {% for key, value in citation.items() %} {% if key not in ["id", "title",
+      "general_id"] and value %}
+      <div class="field-row">
+        <dt>{{ key|replace('_',' ')|title }}</dt>
+        <dd>{{ value }}</dd>
+      </div>
+      {% endif %} {% endfor %}
+    </dl>
+  </section>
 
-<pre>{{ bibtex_format }}</pre>
+  <section class="detail-section">
+    <div class="section-heading">
+      <h2>BibTeX</h2>
+      <a class="btn ghost" href="/bibtex/download">Download all</a>
+    </div>
+    <pre class="bibtex-block">{{ bibtex_format }}</pre>
+  </section>
+</div>
 {% endblock %}
