@@ -1,15 +1,27 @@
 from flask import redirect, render_template, request, jsonify, Response
 from db_helper import reset_db
 from repositories.references_repository import get_citations, save_references, \
-                                        search_references, get_references_by_id
+                                        search_references, get_references_by_id, filter_references
 from config import app, test_env
 from util import reference_fields, to_bibtex
 
 
 @app.route("/")
 def index():
+    message = None
     citations = get_citations()
-    return render_template("index.html", citations=citations)
+    query = request.args.get("query")
+    year = request.args.get("year")
+    author = request.args.get("author")
+    types = request.args.getlist("type_filter")
+    if query or year or author:
+        citations = search_references(query=query, year=year, author=author)
+        if len(citations) == 0:
+            message = "No results matched the search query"
+    if types:
+        citations = filter_references(citations, types)
+
+    return render_template("index.html", citations=citations, message=message)
 
 @app.route("/references/type")
 def choose_reference_type():
@@ -31,17 +43,7 @@ def create_reference():
     save_references(references, ref_type)
     return redirect("/")
 
-@app.route("/search", methods=["POST", "GET"])
-def search():
-    results = None
-    message = None
-    query = request.args.get("query")
-    if query:
-        results = search_references(query)
-        if len(results) == 0:
-            message = "No results matched the search query"
-    return render_template("search.html", results=results, message=message)
-
+    
 @app.route("/bibtex/download")
 def download_all_bibtex():
     all_references = get_citations()

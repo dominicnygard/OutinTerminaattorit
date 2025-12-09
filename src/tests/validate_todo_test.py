@@ -15,3 +15,8 @@ class TestFieldValidation(unittest.TestCase):
 
         with self.assertRaises(UserInputError):
             validate_field("koodaa" * 20)
+
+
+
+# test creating??
+# test input validation
