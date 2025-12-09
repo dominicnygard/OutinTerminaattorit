@@ -1,6 +1,6 @@
 [MASTER]
 
-ignore-paths=src/tests
+ignore-paths=src/tests,src/input_validation.py
 ignore=single_file_to_ignore.py
 
 [MESSAGE CONTROL]

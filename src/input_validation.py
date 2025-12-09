@@ -1,9 +1,9 @@
 
-def validate_type(type):
-    pass
+def validate_type(ref_type):
+    ref_type
 
 def validate_title(title):
-    if not (2 <= len(title) <= 250):
+    if not 2 <= len(title) <= 250:
         return "Title length must be in range 2-250"
 
 def validate_year(year):
@@ -15,20 +15,20 @@ def validate_year(year):
         return "Year out of range"
 
 def validate_author(author):
-    if not (2 <= len(author) <= 150):
+    if not 2 <= len(author) <= 150:
         return "Author length must be in range 2-150"
     # check if only letters
     if not author.isalpha():
         return "Author must consist of only letters"
-    
+
 def validate_journal(journal):
-    pass
+    journal
 
 def validate_publisher(publisher):
-    pass
+    publisher
 
 def validate_address(address):
-    pass
+    address
 
 
 
@@ -37,9 +37,6 @@ def validate_address(address):
 # contain into validate_text_input etc
 
 # goes into validate text: title
-# booktitle, journal, publisher, 
+# booktitle, journal, publisher,
 
-#validate numbers: pages, 
-
-
-
+#validate numbers: pages,

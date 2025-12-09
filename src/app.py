@@ -43,7 +43,6 @@ def create_reference():
     save_references(references, ref_type)
     return redirect("/")
 
-    
 @app.route("/bibtex/download")
 def download_all_bibtex():
     all_references = get_citations()

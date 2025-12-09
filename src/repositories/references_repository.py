@@ -58,10 +58,10 @@ def search_references(query=None, year=None, author=None):
         results.append(ref)
     return results
 
-def filter_references(references, types):
+def filter_references(refs, types):
     results = []
     types = [t.lower() for t in types]
-    for ref in references:
+    for ref in refs:
         if ref["type"] in types:
             results.append(ref)
     return results
