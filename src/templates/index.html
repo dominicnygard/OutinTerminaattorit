@@ -1,133 +1,184 @@
-{% extends "layout.html" %}
-{% block title %}Reference App{% endblock %}
-{% block content %}
+{% extends "layout.html" %} {% block title %}Reference App{% endblock %} {%
+block content %}
 <div class="container">
-    <h1 class="page-title">Reference App</h1>
+  <h1 class="page-title">Reference App</h1>
 
-    <div class="actions">
-        <a class="btn" href="/references/type">➕ Add New Reference</a>
-        <a class="btn" href="/bibtex/download">⭳ Download References</a>
+  <div class="actions">
+    <a class="btn" href="/references/type">➕ Add New Reference</a>
+    <a class="btn" href="/bibtex/download">⭳ Download References</a>
+  </div>
+
+  <div class="search-filter-toggle">
+    <button type="button" id="search-filter-toggle-btn" class="toggle-btn">
+      Show search & filters
+    </button>
+  </div>
+
+  <section class="search-filter-panel" id="search-filter-panel">
+    <div class="search-section">
+      <h3>Search References</h3>
+      <form action="/" method="GET" class="search-form">
+        <div class="search-fields">
+          <div class="search-field">
+            <label for="query">Title</label>
+            <input
+              type="text"
+              id="query"
+              name="query"
+              placeholder="Enter reference title..."
+              value="{{ query }}"
+            />
+          </div>
+          <div class="search-field">
+            <label for="year">Year</label>
+            <input
+              type="text"
+              id="year"
+              name="year"
+              placeholder="e.g., 2024"
+              value="{{ year }}"
+            />
+          </div>
+          <div class="search-field">
+            <label for="author">Author</label>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Enter author name..."
+              value="{{ author }}"
+            />
+          </div>
+        </div>
+        <button type="submit" class="search-btn">🔍 Search</button>
+      </form>
     </div>
 
-  <p>Search:</p>
-  <form action="/" method="GET">
-    <label for="query">Title:</label>
-    <input type="text" name="query" />
-    <label for="year">Year:</label>
-    <input type="text" name="year" />
-    <label for="author">Author:</label>
-    <input type="text" name="author" />
-    <button type="submit">Search</button>
-  </form>
+    <div class="filter-section">
+      <h3>Filter by Type</h3>
+      <form action="/" method="GET" class="filter-form">
+        <div class="filter-grid">
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Articles" {% if
+            'Articles' in selected_types %}checked{% endif %} />
+            <span>Articles</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Books" {% if
+            'Books' in selected_types %}checked{% endif %} />
+            <span>Books</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Inproceedings" {%
+            if 'Inproceedings' in selected_types %}checked{% endif %} />
+            <span>In Proceedings</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Booklets" {% if
+            'Booklets' in selected_types %}checked{% endif %} />
+            <span>Booklets</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Conferences" {% if
+            'Conferences' in selected_types %}checked{% endif %} />
+            <span>Conferences</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Inbooks" {% if
+            'Inbooks' in selected_types %}checked{% endif %} />
+            <span>In Books</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Incollections" {%
+            if 'Incollections' in selected_types %}checked{% endif %} />
+            <span>In Collections</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Manuals" {% if
+            'Manuals' in selected_types %}checked{% endif %} />
+            <span>Manuals</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Mastertheseses" {%
+            if 'Mastertheseses' in selected_types %}checked{% endif %} />
+            <span>Master's Theses</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Phdtheseses" {% if
+            'Phdtheseses' in selected_types %}checked{% endif %} />
+            <span>PhD Theses</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Proceedings" {% if
+            'Proceedings' in selected_types %}checked{% endif %} />
+            <span>Proceedings</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Techreports" {% if
+            'Techreports' in selected_types %}checked{% endif %} />
+            <span>Technical Reports</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" name="type_filter" value="Unpublished" {% if
+            'Unpublished' in selected_types %}checked{% endif %} />
+            <span>Unpublished</span>
+          </label>
+        </div>
+        <button type="submit" class="filter-btn">📋 Filter</button>
+      </form>
+    </div>
+  </section>
 
-  <p>Filter by type:</p>
-  <form action="/" method="GET">
-    <input type="checkbox" id="Articles" name="type_filter" value="Articles" />
-    <label for="Articles"> Articles</label>
+  <script>
+    const panel = document.getElementById("search-filter-panel");
+    const toggleBtn = document.getElementById("search-filter-toggle-btn");
+    const collapseText = "Hide search & filters";
+    const expandText = "Show search & filters";
 
-    <input type="checkbox" id="Books" name="type_filter" value="Books" />
-    <label for="Books"> Books</label>
+    function setState(isOpen) {
+      if (isOpen) {
+        panel.classList.remove("is-hidden");
+        toggleBtn.textContent = collapseText;
+      } else {
+        panel.classList.add("is-hidden");
+        toggleBtn.textContent = expandText;
+      }
+    }
 
-    <input
-      type="checkbox"
-      id="Inproceedings"
-      name="type_filter"
-      value="Inproceedings"
-    />
-    <label for="Inproceedings"> Inproceedings</label>
+    let open = true;
+    setState(open);
 
-    <input type="checkbox" id="Booklets" name="type_filter" value="Booklets" />
-    <label for="Booklets"> Booklets</label>
+    toggleBtn.addEventListener("click", () => {
+      open = !open;
+      setState(open);
+    });
+  </script>
 
-    <input
-      type="checkbox"
-      id="Conferences"
-      name="type_filter"
-      value="Conferences"
-    />
-    <label for="Conferences"> Conferences</label>
+  <h2 class="section-title">All References</h2>
 
-    <input type="checkbox" id="Inbooks" name="type_filter" value="Inbooks" />
-    <label for="Inbooks"> Inbooks</label>
-
-    <input
-      type="checkbox"
-      id="Incollections"
-      name="type_filter"
-      value="Incollections"
-    />
-    <label for="Incollections"> Incollections</label>
-    <br />
-    <input type="checkbox" id="Manuals" name="type_filter" value="Manuals" />
-    <label for="Manuals"> Manuals</label>
-
-    <input
-      type="checkbox"
-      id="Mastertheses"
-      name="type_filter"
-      value="Mastertheses"
-    />
-    <label for="Mastertheses"> Mastertheses</label>
-
-    <input
-      type="checkbox"
-      id="Pdhtheses"
-      name="type_filter"
-      value="Pdhtheses"
-    />
-    <label for="Pdhtheses"> Pdhtheses</label>
-
-    <input
-      type="checkbox"
-      id="Proceedings"
-      name="type_filter"
-      value="Proceedings"
-    />
-    <label for="Proceedings"> Proceedings</label>
-
-    <input
-      type="checkbox"
-      id="Techreports"
-      name="type_filter"
-      value="Techreports"
-    />
-    <label for="Techreports"> Techreports</label>
-
-    <input
-      type="checkbox"
-      id="Unpublished"
-      name="type_filter"
-      value="Unpublished"
-    />
-    <label for="Unpublished"> Unpublished</label>
-    <br />
-    <button type="submit">Filter</button>
-  </form>
-
-  <h2 class="section-title">All Citations</h2>
-
-    <h2 class="section-title">All References</h2>
-
-    {% if citations %}
-        <ul class="citation-list">
-        {% for cite in citations %}
-            <li class="citation-card">
-                <div class="citation-main">
-                    <strong>{{ cite['type'] }}:</strong>
-                    <a href="/references/{{ cite['id'] }}" class="citation-title">
-                        {{ cite['title'] }}
-                    </a>
-                </div>
-                <div class="citation-meta">
-                    {{ cite['year'] }} &middot; {{ cite['author'] }}
-                </div>
-            </li>
-        {% endfor %}
-        </ul>
-    {% elif message %}
-        <p><i>{{ message }}</i></p>
-    {% else %}
-        <p><i>No references added yet</i></p>
-    {% endif %}
+  {% if citations %}
+  <ul class="citation-list">
+    {% for cite in citations %}
+    <li class="citation-card">
+      <div class="citation-main">
+        <strong>{{ cite['type'] }}:</strong>
+        <a
+          href="/references/{{ cite['id'] }}"
+          class="citation-title citation-card-link"
+        >
+          {{ cite['title'] }}
+        </a>
+      </div>
+      <div class="citation-meta">
+        {{ cite['year'] }} &middot; {{ cite['author'] }}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% elif message %}
+  <p><i>{{ message }}</i></p>
+  {% else %}
+  <p><i>No references added yet</i></p>
+  {% endif %}
 </div>
 {% endblock %}

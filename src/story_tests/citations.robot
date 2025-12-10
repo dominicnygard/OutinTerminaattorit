@@ -7,72 +7,78 @@ Test Setup       Reset Citations
 *** Test Cases ***
 At start there are no citations
     Go To  ${HOME_URL}
-    Title Should Be  Citation App
-    Page Should Contain  No citations added
+    Title Should Be  Reference App
+    Page Should Contain  No references added yet
 
 After adding a reference, there is one
     Go To  ${HOME_URL}
-    Click Link  xpath=//a[contains(., 'Add New Citation')]
+    Click Link  xpath=//a[contains(., 'Add New Reference')]
     Click Button  Continue
-    Input Text  title  Test article
-    Input Text  author  Testi Testinen
-    Input Text  year  2025
-    Input Text  journal  science
+    Wait Until Element Is Visible  id=title  timeout=5s
+    Input Text  id=title  Test article
+    Input Text  id=author  Testi Testinen
+    Input Text  id=year  2025
+    Input Text  id=journal  science
     Click Button  Save reference
-    Page Should Contain  articles
+    Wait Until Page Contains  articles  timeout=5s
 
 After adding two different types of citations there are two different types
     Go To  ${HOME_URL}
-    Click Link  xpath=//a[contains(., 'Add New Citation')]
+    Click Link  xpath=//a[contains(., 'Add New Reference')]
     Click Button  Continue
-    Input Text  title  Test title
-    Input Text  author  Testi Testinen
-    Input Text  year  2025
-    Input Text  journal  science
+    Wait Until Element Is Visible  id=title  timeout=5s
+    Input Text  id=title  Test title
+    Input Text  id=author  Testi Testinen
+    Input Text  id=year  2025
+    Input Text  id=journal  science
     Click Button  Save reference
-    Click Link  xpath=//a[contains(., 'Add New Citation')]
+    Wait Until Page Contains  articles  timeout=5s
+    Click Link  xpath=//a[contains(., 'Add New Reference')]
     Select Radio Button  reference_type  books
     Click Button  Continue
-    Input Text  title  Test title
-    Input Text  author  Testi Testinen
-    Input Text  year  2025
-    Input Text  publisher  pub
-    Input Text  address  add
+    Wait Until Element Is Visible  id=title  timeout=5s
+    Input Text  id=title  Test title
+    Input Text  id=author  Testi Testinen
+    Input Text  id=year  2025
+    Input Text  id=publisher  pub
+    Input Text  id=address  add
     Click Button  Save reference
+    Wait Until Page Contains  books  timeout=5s
     Page Should Contain  articles
     Page Should Contain  books
 
-
-
 When searching for reference with right title there is a search result
     Go To  ${HOME_URL}
-    Click Link  xpath=//a[contains(., 'Add New Citation')]
+    Click Link  xpath=//a[contains(., 'Add New Reference')]
     Click Button  Continue
-    Input Text  title  Test article
-    Input Text  author  Testi Testinen
-    Input Text  year  2025
-    Input Text  journal  science
+    Wait Until Element Is Visible  id=title  timeout=5s
+    Input Text  id=title  Test article
+    Input Text  id=author  Testi Testinen
+    Input Text  id=year  2025
+    Input Text  id=journal  science
     Click Button  Save reference
-    Input Text  name=query  Test article
-    Click Button  Search
+    Wait Until Page Contains  Test article  timeout=5s
+    Input Text  id=query  Test article
+    Click Button  xpath=//button[contains(., 'Search')]
     Page Should Contain  Test article
 
 When searching for reference with wrong title there is a message
     Go To  ${HOME_URL}
-    Input Text  name=query  wrong query
-    Click Button  Search
+    Input Text  id=query  wrong query
+    Click Button  xpath=//button[contains(., 'Search')]
     Page Should Contain  No results matched the search query
-
 
 Clicking a citation opens detail view and bibtex
     Go To  ${HOME_URL}
-    Click Link  xpath=//a[contains(., 'Add New Citation')]
+    Click Link  xpath=//a[contains(., 'Add New Reference')]
     Click Button  Continue
-    Input Text  title  Article
-    Input Text  author  Author
-    Input Text  year  2024
-    Input Text  journal  Journal
+    Wait Until Element Is Visible  id=title  timeout=5s
+    Input Text  id=title  Article
+    Input Text  id=author  Author
+    Input Text  id=year  2024
+    Input Text  id=journal  Journal
     Click Button  Save reference
+    Wait Until Element Is Visible  xpath=//a[contains(@class,'citation-card-link')]  timeout=5s
     Click Link  xpath=//a[contains(@class,'citation-card-link') and contains(., 'Article')]
     Page Should Contain  Article
     Page Should Contain  Author

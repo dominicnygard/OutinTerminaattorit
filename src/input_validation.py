@@ -1,8 +1,21 @@
 import re
 
 months = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]
-types = ["articles", "books", "booklets", "conferences", "inbooks", "incollections", "inproceedings",
-                    "manuals", "mastertheses", "phdtheses", "proceedings", "techreports", "unpublished"]
+types = [
+    "articles",
+    "books",
+    "booklets",
+    "conferences",
+    "inbooks",
+    "incollections",
+    "inproceedings",
+    "manuals",
+    "mastertheseses",
+    "phdtheseses",
+    "proceedings",
+    "techreports",
+    "unpublished",
+]
 
 def validate_title(title):
     if not 2 <= len(title) <= 250:

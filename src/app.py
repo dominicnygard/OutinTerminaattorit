@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, jsonify, Response, flash
+from flask import redirect, render_template, request, jsonify, Response
 from db_helper import reset_db
 from repositories.references_repository import get_citations, save_references, \
                                         search_references, get_references_by_id, filter_references
@@ -22,7 +22,15 @@ def index():
     if types:
         citations = filter_references(citations, types)
 
-    return render_template("index.html", citations=citations, message=message)
+    return render_template(
+        "index.html",
+        citations=citations,
+        message=message,
+        selected_types=types or [],
+        query=query or "",
+        year=year or "",
+        author=author or "",
+    )
 
 @app.route("/references/type")
 def choose_reference_type():
@@ -54,7 +62,7 @@ def create_reference():
 
     save_references(references, ref_type)
     return redirect("/")
-    
+
 @app.route("/bibtex/download")
 def download_all_bibtex():
     all_references = get_citations()
