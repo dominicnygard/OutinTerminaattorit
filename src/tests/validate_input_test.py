@@ -1,5 +1,5 @@
 import unittest
-from src import input_validation
+import input_validation
 
 
 class TestTitleValidation(unittest.TestCase):
