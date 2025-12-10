@@ -1,34 +1,11 @@
 {% extends "layout.html" %}
-
-{% block title %}Citation App{% endblock %}
-
-
-{% if citations %}
-<ul>
-  {% for cite in citations %}
-  <li style="display: flex">
-    <div>
-      {{ cite['type'] }}:
-      <a href="/references/{{ cite['id'] }}">{{ cite['title'] }}</a
-      ><i> {{ cite['year'] }}, {{ cite['author'] }}</i>
-    </div>
-  </li>
-  {% endfor %}
-</ul>
-{% elif message %}
-    <p><i>{{ message }}</i></p>
-{% else %}
-  <p><i>No citations added</i></p>
-{% endif %}
-
-
-
+{% block title %}Reference App{% endblock %}
 {% block content %}
 <div class="container">
-    <h1 class="page-title">Citation App</h1>
+    <h1 class="page-title">Reference App</h1>
 
     <div class="actions">
-        <a class="btn" href="/references/type">➕ Add New Citation</a>
+        <a class="btn" href="/references/type">➕ Add New Reference</a>
         <a class="btn" href="/bibtex/download">⭳ Download References</a>
     </div>
 
@@ -88,7 +65,7 @@
   </form>
 
 
-    <h2 class="section-title">All Citations</h2>
+    <h2 class="section-title">All References</h2>
 
     {% if citations %}
         <ul class="citation-list">
@@ -109,7 +86,7 @@
     {% elif message %}
         <p><i>{{ message }}</i></p>
     {% else %}
-        <p><i>No citations added yet.</i></p>
+        <p><i>No references added yet</i></p>
     {% endif %}
 </div>
 {% endblock %}

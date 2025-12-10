@@ -1,6 +1,10 @@
 {% extends "layout.html" %} {% block body %}
 <h2>Add new {{ type }}</h2>
 
+{% if error_message %}
+  <p>{{ error_message }}</p>
+{% endif %}
+
 <form action="/references/create" method="post">
   <input type="hidden" name="reference_type" value="{{ type }}" />
   <h3>Required fields</h3>
