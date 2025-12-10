@@ -9,11 +9,11 @@ CREATE TABLE items (
 CREATE TABLE articles (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  month TEXT,
   journal TEXT,
-  volume INTEGER,
-  number INTEGER,
+  volume TEXT,
+  number TEXT,
   pages TEXT,
+  month TEXT,
   notes TEXT
 );
 
@@ -27,24 +27,31 @@ CREATE TABLE books (
 CREATE TABLE booklets (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  month TEXT,
-  address TEXT,
-  notes TEXT,
   howpublished TEXT,
-  editor TEXT
+  address TEXT,
+  editor TEXT,
+  volume TEXT,
+  number TEXT,
+  series TEXT,
+  organization TEXT,
+  month TEXT,
+  notes TEXT
 );
 
 CREATE TABLE conferences (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  month TEXT,
   booktitle TEXT,
-  publisher TEXT,
-  address TEXT,
-  pages TEXT,
-  notes TEXT,
   editor TEXT,
-  organization TEXT
+  volume TEXT,
+  number TEXT,
+  series TEXT,
+  pages TEXT,
+  address TEXT,
+  month TEXT,
+  organization TEXT,
+  publisher TEXT,
+  notes TEXT
 );
 
 CREATE TABLE inbooks (
@@ -52,97 +59,96 @@ CREATE TABLE inbooks (
   general_id INTEGER REFERENCES items,
   booktitle TEXT,
   publisher TEXT,
-  pages TEXT,
-  notes TEXT,
   editor TEXT,
-  edition INTEGER
+  volume TEXT,
+  number TEXT,
+  series TEXT,
+  address TEXT,
+  edition TEXT,
+  month TEXT,
+  pages TEXT,
+  notes TEXT
 );
 
-CREATE TABLE incolletions (
+CREATE TABLE incollections (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  month TEXT,
   booktitle TEXT,
   publisher TEXT,
-  address TEXT,
+  editor TEXT,
+  volume TEXT,
+  number TEXT,
   series TEXT,
-  volume INTEGER,
-  number INTEGER,
   pages TEXT,
-  editor TEXT
+  address TEXT,
+  month TEXT
 );
 
 CREATE TABLE inproceedings (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  month TEXT,
   booktitle TEXT,
-  publisher TEXT,
-  address TEXT,
-  series TEXT,
-  volume INTEGER,
-  number INTEGER,
-  pages TEXT,
   editor TEXT,
-  organization TEXT
+  volume TEXT,
+  number TEXT,
+  series TEXT,
+  pages TEXT,
+  address TEXT,
+  month TEXT,
+  organization TEXT,
+  publisher TEXT
 );
 
 CREATE TABLE manuals (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  month TEXT,
-  address TEXT,
-  notes TEXT,
   organization TEXT,
-  edition TEXT
+  address TEXT,
+  edition TEXT,
+  month TEXT,
+  notes TEXT
 );
 
 CREATE TABLE mastertheseses (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  month TEXT,
-  address TEXT,
-  notes TEXT,
   school TEXT,
-  type TEXT
-);
-
-CREATE TABLE miscs (
-  id SERIAL PRIMARY KEY,
-  general_id INTEGER REFERENCES items
+  address TEXT,
+  month TEXT,
+  notes TEXT
 );
 
 CREATE TABLE phdtheseses (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  month TEXT,
-  address TEXT,
-  notes TEXT,
   school TEXT,
-  type TEXT
+  address TEXT,
+  month TEXT,
+  notes TEXT
 );
 
 CREATE TABLE proceedings (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  month TEXT,
-  publisher TEXT,
-  address TEXT,
+  editor TEXT,
+  volume TEXT,
+  number TEXT,
   series TEXT,
-  volume INTEGER,
-  number INTEGER,
-  editor TEXT
+  address TEXT,
+  month TEXT,
+  publisher TEXT
 );
 
 CREATE TABLE techreports (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
   institution TEXT,
-  number INTEGER
+  number TEXT
 );
 
-CREATE TABLE unpublished (
+CREATE TABLE unpublisheds (
   id SERIAL PRIMARY KEY,
   general_id INTEGER REFERENCES items,
-  institution TEXT
+  institution TEXT,
+  number TEXT
 );

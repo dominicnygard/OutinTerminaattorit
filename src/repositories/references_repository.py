@@ -47,13 +47,13 @@ def search_references(query=None, year=None, author=None):
     all_references = references.get_all() if references.get_all() else get_citations()
     for ref in all_references:
         if query:
-            if not query.lower() in ref["title"].lower():
+            if not query.lower() in ref.get("title", "").lower():
                 continue
         if year:
-            if not year in ref["year"]:
+            if not year in ref.get("year", ""):
                 continue
         if author:
-            if not author.lower() in ref["author"].lower():
+            if not author.lower() in ref.get("author", "").lower():
                 continue
         results.append(ref)
     return results
@@ -62,7 +62,7 @@ def filter_references(refs, types):
     results = []
     types = [t.lower() for t in types]
     for ref in refs:
-        if ref["type"] in types:
+        if ref.get("type", "").lower() in types:
             results.append(ref)
     return results
 

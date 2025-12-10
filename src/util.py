@@ -6,10 +6,10 @@ class UserInputError(Exception):
 
 def validate_field(content):
     if len(content) < 5:
-        raise UserInputError("Todo content length must be greater than 4")
+        raise UserInputError("content length must be greater than 4")
 
     if len(content) > 100:
-        raise UserInputError("Todo content length must be smaller than 100")
+        raise UserInputError("content length must be smaller than 100")
 
 reference_fields = {
     "articles": {
@@ -27,19 +27,19 @@ reference_fields = {
             ["title", "author", "year", "howpublished", "address"],
         "optional":
             ["editor", "volume", "number", "series",
-             "organization", "month", "note"]},
+             "organization", "month", "notes"]},
     "conferences": {
         "required":
             ["title", "author", "year", "booktitle"],
         "optional":
             ["editor", "volume", "number", "series", "pages",
-             "address", "month", "organization", "publisher", "note"]},
+             "address", "month", "organization", "publisher", "notes"]},
     "inbooks": {
         "required":
             ["title", "author", "year", "booktitle", "publisher"],
         "optional":
             ["editor", "volume", "number", "series", "address",
-             "edition", "month", "pages", "note"]},
+             "edition", "month", "pages", "notes"]},
     "incollections": {
         "required":
             ["title", "author", "year", "booktitle", "publisher"],
@@ -57,20 +57,20 @@ reference_fields = {
             ["title", "year"],
         "optional":
             ["author", "organization", "address",
-             "edition", "month", "note"]},
+             "edition", "month", "notes"]},
     "mastertheseses": {
         "required":
             ["title", "year", "author", "school"],
         "optional":
-            ["type", "address", "month", "note"]},
+            ["address", "month", "notes"]},
     "phdtheseses": {
         "required":
             ["title", "year", "author", "school"],
         "optional":
-            ["type", "address", "month", "note"]},
+            ["address", "month", "notes"]},
     "proceedings": {
         "required":
-            ["title", "year"],
+            ["title", "year", "author"],
         "optional":
             ["editor", "volume", "number", "series",
              "address", "month", "publisher"]},
