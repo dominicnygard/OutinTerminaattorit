@@ -19,7 +19,7 @@ def validate_year(year):
 def validate_author(author):
     if not 2 <= len(author) <= 150:
         return "Author length must be in range 2-150"
-    if not author.isalpha():
+    if not author.replace(" ", "").isalpha():
         return "Author input must consist of only letters"
     
 def validate_text(text, max_len=200):
@@ -38,7 +38,7 @@ def validate_pages(pages):
         return "Pages must be a number or range (e.g., 12 or 12--19,25--30)"
 
 def validate_integer(integer):
-    if not integer.isdigit():
+    if not str(integer).isdigit():
         return f"Field with input {integer} must contain only numbers"
 
 
