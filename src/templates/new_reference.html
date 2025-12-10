@@ -16,19 +16,6 @@
   <form action="/references/create" method="post" class="reference-form">
     <input type="hidden" name="reference_type" value="{{ type }}" />
 
-<form action="/references/create" method="post">
-  <input type="hidden" name="reference_type" value="{{ type }}" />
-  <h3>Required fields</h3>
-  {% for field in fields["required"] %}
-  <label for="{{ field }}">{{ field|capitalize }}: </label><br />
-  <input type="text" id="{{ field }}" name="{{ field }}" required /><br /><br />
-  {% endfor %} {% if fields["optional"] %}
-  <h3>Optional fields</h3>
-  {% for field in fields["optional"] %}
-  <label for="{{ field }}">{{ field|capitalize }}: </label><br />
-  <input type="text" id="{{ field }}" name="{{ field }}" /><br /><br />
-  {% endfor %} {% endif %}
-
     <section class="field-section">
       <h3>Required fields</h3>
       <div class="field-grid">
