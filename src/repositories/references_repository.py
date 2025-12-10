@@ -1,6 +1,5 @@
 from sqlalchemy import text
 from db_helper import db
-import input_validation
 from config import references
 
 def save_references(ref_input, ref_type):

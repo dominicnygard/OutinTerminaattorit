@@ -1,5 +1,7 @@
 [MASTER]
 
+init-hook='import sys; sys.path.append("src")'
+
 ignore-paths=src/tests,src/input_validation.py
 ignore=single_file_to_ignore.py
 
