@@ -1,6 +1,8 @@
+import re
 
-def validate_type(ref_type):
-    ref_type
+months = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]
+types = ["articles", "books", "booklets", "conferences", "inbooks", "incollections", "inproceedings",
+                    "manuals", "mastertheses", "phdtheses", "proceedings", "techreports", "unpublished"]
 
 def validate_title(title):
     if not 2 <= len(title) <= 250:
@@ -17,26 +19,48 @@ def validate_year(year):
 def validate_author(author):
     if not 2 <= len(author) <= 150:
         return "Author length must be in range 2-150"
-    # check if only letters
     if not author.isalpha():
-        return "Author must consist of only letters"
+        return "Author input must consist of only letters"
+    
+def validate_text(text, max_len=200):
+    if len(text) == 1:
+        return f"Field with input {text} must be at least 2 characters"
+    if not (len(text) <= max_len):
+        return "Input length too long. Max input length is 200 characters"
+    
+def validate_month(month):
+    if month.lower() not in months:
+        return "Month must be in format 'jan', 'feb'..."
 
-def validate_journal(journal):
-    journal
+def validate_pages(pages):
+    pattern = r'^\d+(--\d+)?(,\s*\d+(--\d+)?)*$'
+    if not re.match(pattern, pages):
+        return "Pages must be a number or range (e.g., 12 or 12--19,25--30)"
 
-def validate_publisher(publisher):
-    publisher
-
-def validate_address(address):
-    address
+def validate_integer(integer):
+    if not integer.isdigit():
+        return f"Field with input {integer} must contain only numbers"
 
 
+VALIDATION_METHODS = {
+    "author":       validate_author,
+    "editor":       validate_text,
+    "title":        validate_title,
+    "journal":      validate_text,
+    "publisher":    validate_text,
+    "organization": validate_text,
+    "school":       validate_text,
+    "institution":  validate_text,
+    "address":      validate_text,
+    "booktitle":    validate_text,
+    "note":         validate_text,
+    "howpublished": validate_text,
+    "edition":      validate_text,
 
-# add more
+    "year":         validate_year,
+    "month":        validate_month,
+    "pages":        validate_pages,
+    "volume":       validate_integer,
+    "number":       validate_integer,
 
-# contain into validate_text_input etc
-
-# goes into validate text: title
-# booktitle, journal, publisher,
-
-#validate numbers: pages,
+}

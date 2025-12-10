@@ -1,28 +1,13 @@
-{% extends "layout.html" %} {% block title %}Citation App{% endblock %} {% if
-citations %}
-<ul>
-  {% for cite in citations %}
-  <li style="display: flex">
-    <div>
-      {{ cite['type'] }}:
-      <a href="/references/{{ cite['id'] }}">{{ cite['title'] }}</a
-      ><i> {{ cite['year'] }}, {{ cite['author'] }}</i>
-    </div>
-  </li>
-  {% endfor %}
-</ul>
-{% elif message %}
-<p><i>{{ message }}</i></p>
-{% else %}
-<p><i>No citations added</i></p>
-{% endif %} {% block content %}
+{% extends "layout.html" %}
+{% block title %}Reference App{% endblock %}
+{% block content %}
 <div class="container">
-  <h1 class="page-title">Citation App</h1>
+    <h1 class="page-title">Reference App</h1>
 
-  <div class="actions">
-    <a class="btn" href="/references/type">➕ Add New Citation</a>
-    <a class="btn" href="/bibtex/download">⭳ Download References</a>
-  </div>
+    <div class="actions">
+        <a class="btn" href="/references/type">➕ Add New Reference</a>
+        <a class="btn" href="/bibtex/download">⭳ Download References</a>
+    </div>
 
   <p>Search:</p>
   <form action="/" method="GET">
@@ -121,26 +106,28 @@ citations %}
 
   <h2 class="section-title">All Citations</h2>
 
-  {% if citations %}
-  <ul class="citation-list">
-    {% for cite in citations %}
-    <li class="citation-card">
-      <a class="citation-card-link" href="/references/{{ cite['id'] }}">
-        <div class="citation-main">
-          <strong>{{ cite['type'] }}:</strong>
-          <span class="citation-title">{{ cite['title'] }}</span>
-        </div>
-        <div class="citation-meta">
-          {{ cite['year'] }} &middot; {{ cite['author'] }}
-        </div>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
-  {% elif message %}
-  <p><i>{{ message }}</i></p>
-  {% else %}
-  <p><i>No citations added yet.</i></p>
-  {% endif %}
+    <h2 class="section-title">All References</h2>
+
+    {% if citations %}
+        <ul class="citation-list">
+        {% for cite in citations %}
+            <li class="citation-card">
+                <div class="citation-main">
+                    <strong>{{ cite['type'] }}:</strong>
+                    <a href="/references/{{ cite['id'] }}" class="citation-title">
+                        {{ cite['title'] }}
+                    </a>
+                </div>
+                <div class="citation-meta">
+                    {{ cite['year'] }} &middot; {{ cite['author'] }}
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% elif message %}
+        <p><i>{{ message }}</i></p>
+    {% else %}
+        <p><i>No references added yet</i></p>
+    {% endif %}
 </div>
 {% endblock %}

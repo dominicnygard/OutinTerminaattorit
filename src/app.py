@@ -1,9 +1,10 @@
-from flask import redirect, render_template, request, jsonify, Response
+from flask import redirect, render_template, request, jsonify, Response, flash
 from db_helper import reset_db
 from repositories.references_repository import get_citations, save_references, \
                                         search_references, get_references_by_id, filter_references
 from config import app, test_env
 from util import reference_fields, to_bibtex
+import input_validation
 
 
 @app.route("/")
@@ -40,9 +41,20 @@ def create_reference():
     references = dict(request.form)
     ref_type = references.pop('reference_type')
     references = {k: (None if v == '' else v) for k, v in references.items()}
+
+    for key in references:
+        if references[key] is None:
+            continue
+        if key in input_validation.VALIDATION_METHODS:
+            error = input_validation.VALIDATION_METHODS[key](references[key])
+            if error:
+                return render_template("new_reference.html",
+                    fields = reference_fields[ref_type],
+                    type = ref_type, error_message=error)
+
     save_references(references, ref_type)
     return redirect("/")
-
+    
 @app.route("/bibtex/download")
 def download_all_bibtex():
     all_references = get_citations()
