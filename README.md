@@ -8,6 +8,9 @@ Käyttäjä pystyy lisätä viitteitä kaikista kategorioista ja hakea viitteit�
 Linkki backlogeihin: 
 https://helsinkifi-my.sharepoint.com/:x:/g/personal/ksatsar_ad_helsinki_fi/IQAg0bz1o897R6rDT4F5pY6VAWb-BkHq6T0M7_v5R4zmyfI?e=SfX6bX
 
+Linkki raporttiin:
+https://docs.google.com/document/d/1VLiWueXaeN21n7h9cLWRV7b_4QW7gOwABIC_GtJVwlE/edit?tab=t.0
+
 Sovellus otetaan käyttöön kloonamalla projekti ja sitten ajaa  
 `poetry install`  
 projektin juuressa.  
